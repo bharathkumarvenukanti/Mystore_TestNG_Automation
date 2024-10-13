@@ -21,7 +21,7 @@ public class TestBase {
 	public static WebDriver driver;
 	public static WebDriverWait wait;
 	public static Properties config=new Properties();
-	public static String PropPath="\\src\\test\\java\\com\\mystore\\driverscript\\configuration.properties";
+	public static String PropPath="/src/test/java/com/mystore/driverscript/configuration.properties";
 	public static FileInputStream fis;
 
 	@BeforeSuite
@@ -61,7 +61,7 @@ public class TestBase {
 @AfterSuite
 public void tearDown() {
 	if(driver!=null) {
-		//driver.close();
+		driver.close();
 		System.out.println("Driver is closed");
 	}
 }
