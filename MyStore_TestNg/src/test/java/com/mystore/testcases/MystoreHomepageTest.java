@@ -39,7 +39,7 @@ public class MystoreHomepageTest extends TestBase {
 		utils.AssrtEquals(ActualHomepageTitle, MystoreExpectedTitle, "Title are not matched");
 		homePageReg=PageFactory.initElements(driver, MystoreHomePage.class);
 	}
-	@Test
+	@Test(priority = 1)
 	public void verifyMystoreHomePageLogo() {
 		// Check if logo is displayed
 		//Logo.isLogoDisplayed();
@@ -58,12 +58,16 @@ public class MystoreHomepageTest extends TestBase {
 			e.printStackTrace();
 		}
 	}
-	@Test
+	@Test(priority = 2)
 	public void testSignIn() {
+		// Click sign-in button using MystoreHomePage methods (clarify purpose of homePageReg)
 		homePageReg.clickSignInButton();
+		// Check if account info is displayed 
 		if (homePageReg.isAccountInfoDisplayed()) {
+			// Soft assert for successful login 
             utils.AssrtTrue(true, LoginInfo);
         } else {
+        	// Soft assert for failed login
         	 utils.AssrtTrue(true, ErrorInfo);
         }
 	}
