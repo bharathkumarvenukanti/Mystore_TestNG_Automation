@@ -9,11 +9,11 @@ import org.openqa.selenium.support.PageFactory;
 import com.mystore.objectrepository.MyStoreObjectsRepository;
 import com.mystore.utilities.TestUtil;
 
-public class MyStoreHomePageLogo {
+public class MyStoreLogo {
 	private WebDriver driver;
 	private TestUtil utils;
 	//MyStoreObjectsRepository repo;
-	public MyStoreHomePageLogo(WebDriver driver) {
+	public MyStoreLogo(WebDriver driver) {
 		this.driver=driver;
 		PageFactory.initElements(driver, this);
 		utils=new TestUtil();

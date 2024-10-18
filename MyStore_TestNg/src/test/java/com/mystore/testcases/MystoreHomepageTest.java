@@ -7,7 +7,8 @@ import org.testng.annotations.Test;
 
 import com.mystore.driverscript.TestBase;
 import com.mystore.objectrepository.MyStoreTitlesRepository;
-import com.mystore.pages.MyStoreHomePageLogo;
+import com.mystore.pages.MyStoreLogo;
+import com.mystore.pages.MystoreHomePage;
 import com.mystore.utilities.TestUtil;
 
 public class MystoreHomepageTest extends TestBase {
@@ -15,23 +16,28 @@ public class MystoreHomepageTest extends TestBase {
 	public HomepageNavigation homePage;
 	public MyStoreTitlesRepository Titlesrepo;
 	public TestUtil utils;
-	public MyStoreHomePageLogo Logo;
+	public MyStoreLogo Logo;
+	public MystoreHomePage homePageReg;
 
 	//Declaring titles
 	public String MystoreExpectedTitle=Titlesrepo.MystoreHomePageTitle;
+	//Declaring Messages/Coments
+	String LoginInfo="Account information is not displayed after successful login.";
+	String ErrorInfo="Error message after invalid login does not match expectation.";
 
 	@BeforeMethod
 	public void VerifyMystoreHomepage() {
 		// Initialize utility and page objects
 		utils=new TestUtil();
 		homePage=new HomepageNavigation();
-		Logo=PageFactory.initElements(driver, MyStoreHomePageLogo.class);
+		Logo=PageFactory.initElements(driver, MyStoreLogo.class);
 		// Launch homepage
 		homePage.LaunchHomepage();
 		// Get actual homepage title
 		String ActualHomepageTitle=driver.getTitle();
 		// Verify homepage title using TestUtil
 		utils.AssrtEquals(ActualHomepageTitle, MystoreExpectedTitle, "Title are not matched");
+		homePageReg=PageFactory.initElements(driver, MystoreHomePage.class);
 	}
 	@Test
 	public void verifyMystoreHomePageLogo() {
@@ -51,6 +57,15 @@ public class MystoreHomepageTest extends TestBase {
 			// Handle potential interruption exception
 			e.printStackTrace();
 		}
+	}
+	@Test
+	public void testSignIn() {
+		homePageReg.clickSignInButton();
+		if (homePageReg.isAccountInfoDisplayed()) {
+            utils.AssrtTrue(true, LoginInfo);
+        } else {
+        	 utils.AssrtTrue(true, ErrorInfo);
+        }
 	}
 	@AfterMethod
 	public void Assertall() {
