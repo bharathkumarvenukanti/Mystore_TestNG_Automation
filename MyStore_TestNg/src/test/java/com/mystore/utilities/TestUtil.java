@@ -21,7 +21,7 @@ public class TestUtil extends TestBase{
 	private Actions actions=new Actions(driver);
 	public static String screenshotPath;
 	public static String screenshotName;
-	public static ExcelReader excel = new ExcelReader(".\\TestData\\Registration Testdata.xlsx");
+	public static ExcelReader excel = new ExcelReader(".\\TestData\\RegistrationTestdata.xlsx");
 	public SoftAssert softAssert = new SoftAssert();
 
 	public static void captureScreenshot() throws IOException {
