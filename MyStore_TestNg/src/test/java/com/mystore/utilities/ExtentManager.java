@@ -19,7 +19,7 @@ public class ExtentManager {
 
         sparkReports.attachReporter(htmlReporter);
         sparkReports.setSystemInfo("Tester Name", "Bharath Kumar");
-        sparkReports.setSystemInfo("Organization", " ");        
+        sparkReports.setSystemInfo("Organization", "My Store");        
         
         return sparkReports;
     }

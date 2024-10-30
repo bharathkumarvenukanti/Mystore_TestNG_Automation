@@ -8,6 +8,7 @@ import org.testng.annotations.Test;
 import com.mystore.driverscript.TestBase;
 import com.mystore.objectrepository.MyStoreTitlesRepository;
 import com.mystore.pages.MyStoreLogo;
+import com.mystore.pages.MyStoreRegistrationPage;
 import com.mystore.pages.MystoreHomePage;
 import com.mystore.utilities.TestUtil;
 
@@ -18,6 +19,7 @@ public class MystoreHomepageTest extends TestBase {
 	public TestUtil utils;
 	public MyStoreLogo Logo;
 	public MystoreHomePage homePageReg;
+	public MyStoreRegistrationPage regPage;
 
 	//Declaring titles
 	public String MystoreExpectedTitle=Titlesrepo.MystoreHomePageTitle;
@@ -38,6 +40,8 @@ public class MystoreHomepageTest extends TestBase {
 		// Verify homepage title using TestUtil
 		utils.AssrtEquals(ActualHomepageTitle, MystoreExpectedTitle, "Title are not matched");
 		homePageReg=PageFactory.initElements(driver, MystoreHomePage.class);
+		regPage=PageFactory.initElements(driver, MyStoreRegistrationPage.class);
+		
 	}
 	@Test(priority = 1)
 	public void verifyMystoreHomePageLogo() {
@@ -59,7 +63,7 @@ public class MystoreHomepageTest extends TestBase {
 		}
 	}
 	@Test(priority = 2)
-	public void testSignIn() {
+	public void testSignIn() throws InterruptedException {
 		// Click sign-in button using MystoreHomePage methods (clarify purpose of homePageReg)
 		homePageReg.clickSignInButton();
 		// Check if account info is displayed 
@@ -70,7 +74,17 @@ public class MystoreHomepageTest extends TestBase {
         	// Soft assert for failed login
         	 utils.AssrtTrue(true, ErrorInfo);
         }
+		Thread.sleep(10000);
+		regPage.validatePageTitle(Titlesrepo.MystoreHomePageTitle);
+		regPage.EnterEmail("Bharathkkk@gmail.com");
+		regPage.ClickOnCreateanaccountButton();
+		regPage.selectGenderRadioBtn("mr");
+		
 	}
+//	@Test(priority = 3, alwaysRun = true)
+//	public void ValidateRegForm() {
+//		
+//	}
 	@AfterMethod
 	public void Assertall() {
 		// Assert all soft assertions from TestUtil

@@ -1,6 +1,7 @@
 package com.mystore.utilities;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.lang.reflect.Method;
 import java.util.Date;
@@ -21,7 +22,8 @@ public class TestUtil extends TestBase{
 	private Actions actions=new Actions(driver);
 	public static String screenshotPath;
 	public static String screenshotName;
-	public static ExcelReader excel = new ExcelReader(".\\TestData\\RegistrationTestdata.xlsx");
+	//".\\TestData\\RegistrationTestdata.xlsx"
+	public static ExcelReader excel = null;
 	public SoftAssert softAssert = new SoftAssert();
 
 	public static void captureScreenshot() throws IOException {
@@ -38,27 +40,37 @@ public class TestUtil extends TestBase{
 
 	} 
 	
-	@DataProvider(name="registerDemo")
-	public Object[][] getData(Method m) {
+	@DataProvider(name="register")
+	public Object[][] getData() {
+	    if (excel == null) {
+	        excel = new ExcelReader(System.getProperty("user.dir") +"\\TestData\\RegistrationTestdata.xlsx");
+	    }
+	    String sheetName = "registerDemo";
+	    int rows = excel.getRowCount(sheetName);
+	    int cols = excel.getColumnCount(sheetName);
+	    if (rows <= 1) {
+	        throw new RuntimeException("No data found in sheet: " + sheetName);
+	    }
 
-		String sheetName = m.getName();
-		int rows = excel.getRowCount(sheetName);
-		int cols = excel.getColumnCount(sheetName);
+	    Object[][] data = new Object[rows - 1][1];
+	    Hashtable<String, String> table=null;
 
-		Object[][] data = new Object[rows - 1][1];
-
-		Hashtable<String,String> table = null;
-
-		for (int rowNum = 2; rowNum <= rows; rowNum++) { 
-			table = new Hashtable<String,String>();			
-			for (int colNum = 0; colNum < cols; colNum++) {
-				table.put(excel.getCellData(sheetName, colNum, 1), excel.getCellData(sheetName, colNum, rowNum));
-				data[rowNum - 2][0] = table;
-			}
-		}
-		return data;
-
+	    for (int rowNum = 2; rowNum <= rows; rowNum++) {
+	        table = new Hashtable<String,String>();
+	        for (int colNum = 0; colNum < cols; colNum++) {
+	            String colName = excel.getCellData(sheetName, colNum, 1);
+	            String cellData = excel.getCellData(sheetName, colNum, rowNum);
+	            table.put(colName, cellData);
+	            
+	        }
+	        data[rowNum - 2][0] = table;
+	        
+	    }
+	    return data;
 	}
+
+	
+
 	public static boolean isTestRunnable(String testName, ExcelReader excel){
 
 		String sheetName="test_suite";
@@ -76,6 +88,9 @@ public class TestUtil extends TestBase{
 		}
 		return false;
 	} 
+
+
+
 
 	    /**
 	     * Move the mouse to the specified element.
