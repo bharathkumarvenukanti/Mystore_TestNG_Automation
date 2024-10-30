@@ -1,4 +1,4 @@
-package com.mystore.testcases;
+   package com.mystore.testcases;
 
 import java.util.Hashtable;
 
@@ -63,9 +63,9 @@ public class MystoreUserRegistration extends TestBase{
 		regPage.enterFirstName(data.get("FirstName"));
 		regPage.enterLastName(data.get("LastName"));
 		regPage.enterPassword(data.get("Password"));
-		regPage.selectDayDropDown(data.get("Day"));
-		regPage.selectMonthDropDown(data.get("Month"));
-		regPage.selectYearDropDown(data.get("Year"));
+//		regPage.selectDayDropDown(data.get("Day"));
+//		regPage.selectMonthDropDown(data.get("Month"));
+//		regPage.selectYearDropDown(data.get("Year"));
 		regPage.selectNewsLettersChkBox(data.get("Newsletter"));
 		regPage.clickRegisterButton();
 		regPage.getSuccessMessage();

@@ -124,8 +124,8 @@ public class MyStoreRegistrationPage {
 		System.out.println(aDay + " is selected from Day drop down");
 	}
 	public void selectMonthDropDown(String month) {
-		 DrpDn = new Select(Monthofbirth);
-		 DrpDn.selectByVisibleText(month);
+		DrpDn = new Select(Monthofbirth);
+		DrpDn.selectByVisibleText(month);
 		System.out.println(month + " is selected from Day drop down");
 	}
 	public void selectYearDropDown(String Year) {
@@ -155,7 +155,7 @@ public class MyStoreRegistrationPage {
 	public void ClickOnSignOut() {
 		UserSignOut.click();
 	}
-	
+
 	//Error Messages
 	public String getCreateAnAccountErrorMsg() {
 		return CreateAnAccountErrorMsg.getText();

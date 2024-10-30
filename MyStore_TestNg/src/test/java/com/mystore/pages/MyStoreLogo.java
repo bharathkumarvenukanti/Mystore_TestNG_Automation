@@ -12,12 +12,13 @@ import com.mystore.utilities.TestUtil;
 public class MyStoreLogo {
 	private WebDriver driver;
 	private TestUtil utils;
-	//MyStoreObjectsRepository repo;
+	
 	public MyStoreLogo(WebDriver driver) {
 		this.driver=driver;
 		PageFactory.initElements(driver, this);
 		utils=new TestUtil();
 	}
+	
 	// Initialize the web elements locators values using FINDBY class	
 	@FindBy(xpath=MyStoreObjectsRepository.LogoXpath) 
 	@CacheLookup
@@ -26,10 +27,12 @@ public class MyStoreLogo {
 	public boolean isLogoDisplayed() {
 		return logoImage.isDisplayed();
 	}
+	
 	public void clickLogo() throws InterruptedException {
 		//logoImage.click();
 		utils.clickElement(logoImage);
 	}
+	
 	public String LogoRedirectsToHomepage(String actualTitle) {
 		return actualTitle=driver.getTitle();
 	}
