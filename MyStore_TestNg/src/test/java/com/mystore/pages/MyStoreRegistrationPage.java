@@ -20,22 +20,22 @@ public class MyStoreRegistrationPage {
 		PageFactory.initElements(driver, this);
 		utils=new TestUtil();
 	}
-	@FindBy(xpath= MyStoreObjectsRepository.EmailXpath)
-	@CacheLookup
-	private WebElement Email;
-	@FindBy(id = MyStoreObjectsRepository.CreateAnAcoountButtonID)
-	@CacheLookup
-	private WebElement CreateAnAcoount;
-	@FindBy(id = MyStoreObjectsRepository.CreateAnAccountErrorMsgID)
-	@CacheLookup
-	private WebElement CreateAnAccountErrorMsg;
+//	@FindBy(xpath= MyStoreObjectsRepository.EmailXpath)
+//	@CacheLookup
+//	private WebElement Email;
+//	@FindBy(id = MyStoreObjectsRepository.CreateAnAcoountButtonID)
+//	@CacheLookup
+//	private WebElement CreateAnAcoount;
+//	@FindBy(id = MyStoreObjectsRepository.CreateAnAccountErrorMsgID)
+//	@CacheLookup
+//	private WebElement CreateAnAccountErrorMsg;
 	@FindBy(xpath = MyStoreObjectsRepository.MrXpath)
 	@CacheLookup
 	private WebElement MrRadioButton;
 	@FindBy(xpath = MyStoreObjectsRepository.MrsXpath)
 	@CacheLookup
 	private WebElement MrsRadioButton;
-	@FindBy(xpath = MyStoreObjectsRepository.FirstNameTexboxXpath)
+	@	FindBy(xpath = MyStoreObjectsRepository.FirstNameTexboxXpath)
 	@CacheLookup
 	private WebElement FirstName;
 	@FindBy(xpath = MyStoreObjectsRepository.LastNameTexboxXpath)
@@ -59,9 +59,9 @@ public class MyStoreRegistrationPage {
 	@FindBy(xpath = MyStoreObjectsRepository.RegisterButtonXpath)
 	@CacheLookup
 	private WebElement RegisterButton;
-	@FindBy(xpath = MyStoreObjectsRepository.UserLogOut)
-	@CacheLookup
-	private WebElement UserSignOut;
+//	@FindBy(xpath = MyStoreObjectsRepository.UserLogOut)
+//	@CacheLookup
+//	private WebElement UserSignOut;
 	@FindBy(xpath = MyStoreObjectsRepository.RegSuccessMessageXpath)
 	@CacheLookup
 	private WebElement RegSuccessMessage;
@@ -84,14 +84,14 @@ public class MyStoreRegistrationPage {
 			System.out.println("The Expected Form Title is "+ expPageTitle);
 		}
 	}
-	public void EnterEmail(String EmailId) {
-		Email.sendKeys(EmailId);
-		System.out.println("Entered Emaiid is:"+EmailId);
-	}
-	public void ClickOnCreateanaccountButton() {
-		CreateAnAcoount.click();
-		utils.AssrtTrue(true, "Unable to click on targetted button");
-	}
+//	public void EnterEmail(String EmailId) {
+//		Email.sendKeys(EmailId);
+//		System.out.println("Entered Emaiid is:"+EmailId);
+//	}
+//	public void ClickOnCreateanaccountButton() {
+//		CreateAnAcoount.click();
+//		utils.AssrtTrue(true, "Unable to click on targetted button");
+//	}
 	public void selectGenderRadioBtn(String gender) {
 		if (gender.equalsIgnoreCase("Mr.")) {
 			MrRadioButton.click();
@@ -152,14 +152,14 @@ public class MyStoreRegistrationPage {
 	public String getSuccessMessage() {
 		return RegSuccessMessage.getText();
 	}
-	public void ClickOnSignOut() {
-		UserSignOut.click();
-	}
+//	public void ClickOnSignOut() {
+//		UserSignOut.click();
+//	}
 
 	//Error Messages
-	public String getCreateAnAccountErrorMsg() {
-		return CreateAnAccountErrorMsg.getText();
-	}
+//	public String getCreateAnAccountErrorMsg() {
+//		return CreateAnAccountErrorMsg.getText();
+//	}
 	public String getRegErrorMessage() {
 		return RegErrorMessage.getText();
 	}

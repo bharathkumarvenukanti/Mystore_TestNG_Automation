@@ -1,4 +1,4 @@
-   package com.mystore.testcases;
+package com.mystore.testcases;
 
 import java.util.Hashtable;
 
@@ -9,6 +9,8 @@ import org.testng.annotations.Test;
 
 import com.mystore.driverscript.TestBase;
 import com.mystore.objectrepository.MyStoreTitlesRepository;
+import com.mystore.pages.MyStoreAccountsPage;
+import com.mystore.pages.MyStoreLoginPage;
 import com.mystore.pages.MyStoreLogo;
 import com.mystore.pages.MyStoreRegistrationPage;
 import com.mystore.pages.MystoreHomePage;
@@ -22,6 +24,8 @@ public class MystoreUserRegistration extends TestBase{
 	//public MyStoreLogo Logo;
 	public MystoreHomePage homePage;
 	public MyStoreRegistrationPage regPage;
+	public MyStoreAccountsPage accounts;
+	public MyStoreLoginPage LoginPage;
 
 	//Declaring titles
 	public String MystoreExpectedTitle=Titlesrepo.MystoreHomePageTitle;
@@ -34,15 +38,13 @@ public class MystoreUserRegistration extends TestBase{
 		Navigation=new HomepageNavigation();
 		homePage=PageFactory.initElements(driver, MystoreHomePage.class);
 		regPage=PageFactory.initElements(driver, MyStoreRegistrationPage.class);
+		accounts=PageFactory.initElements(driver, MyStoreAccountsPage.class);
 		// Initialize utility and page objects
 		utils=new TestUtil();
-		//Navigation=new HomepageNavigation();
-		
-
 	}
+
 	@Test(dataProviderClass = com.mystore.utilities.TestUtil.class, dataProvider ="register",retryAnalyzer = RetryAnalyzer.class)
 	public void registerUser(Hashtable<String,String> data) throws InterruptedException{
-		//homePage=PageFactory.initElements(driver, MystoreHomePage.class);
 		// Verify homepage title using TestUtil
 		Navigation.LaunchHomepage();
 		String ActualHomepageTitle=driver.getTitle();
@@ -57,19 +59,19 @@ public class MystoreUserRegistration extends TestBase{
 		}
 		//regPage=PageFactory.initElements(driver, MyStoreRegistrationPage.class);
 		regPage.validatePageTitle(MystoreRegpageExpectedTitle);
-		regPage.EnterEmail(data.get("Email"));
-		regPage.ClickOnCreateanaccountButton();
+		LoginPage.EnterEmail(data.get("Email"));
+		LoginPage.ClickOnCreateanaccountButton();
 		regPage.selectGenderRadioBtn(data.get("Title"));
 		regPage.enterFirstName(data.get("FirstName"));
 		regPage.enterLastName(data.get("LastName"));
 		regPage.enterPassword(data.get("Password"));
-//		regPage.selectDayDropDown(data.get("Day"));
-//		regPage.selectMonthDropDown(data.get("Month"));
-//		regPage.selectYearDropDown(data.get("Year"));
+		//		regPage.selectDayDropDown(data.get("Day"));
+		//		regPage.selectMonthDropDown(data.get("Month"));
+		//		regPage.selectYearDropDown(data.get("Year"));
 		regPage.selectNewsLettersChkBox(data.get("Newsletter"));
 		regPage.clickRegisterButton();
 		regPage.getSuccessMessage();
-		regPage.ClickOnSignOut();
+		accounts.ClickOnSignOut();
 
 
 	}
